@@ -8,6 +8,8 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"time"
+	"os/exec"
 
 	"github.com/schachmat/ingo"
 	_ "github.com/schachmat/wego/backends"
@@ -79,7 +81,7 @@ func main() {
 	if !ok {
 		log.Fatalf("Could not find selected backend \"%s\"", *selectedBackend)
 	}
-	r := be.Fetch(*location, *numdays)
+	//r := be.Fetch(*location, *numdays)
 
 	// set unit system
 	unit := iface.UnitsMetric
@@ -96,5 +98,13 @@ func main() {
 	if !ok {
 		log.Fatalf("Could not find selected frontend \"%s\"", *selectedFrontend)
 	}
-	fe.Render(r, unit)
+	for {
+		cmd := exec.Command("clear") //Linux example, its tested
+		cmd.Stdout = os.Stdout
+		cmd.Run()
+		r := be.Fetch(*location, *numdays)
+		fe.Render(r, unit)
+		duration := time.Duration(600)*time.Second
+		time.Sleep(duration)
+	}
 }
