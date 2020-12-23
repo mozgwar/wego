@@ -99,12 +99,12 @@ func main() {
 		log.Fatalf("Could not find selected frontend \"%s\"", *selectedFrontend)
 	}
 	for {
+		r := be.Fetch(*location, *numdays)
 		cmd := exec.Command("clear") //Linux example, its tested
 		cmd.Stdout = os.Stdout
 		cmd.Run()
-		r := be.Fetch(*location, *numdays)
 		fe.Render(r, unit)
-		duration := time.Duration(600)*time.Second
+		duration := time.Duration(1200)*time.Second
 		time.Sleep(duration)
 	}
 }
