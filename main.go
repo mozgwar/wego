@@ -104,7 +104,7 @@ func main() {
 		cmd.Stdout = os.Stdout
 		cmd.Run()
 		fe.Render(r, unit)
-		duration := time.Duration(1200)*time.Second
+		duration := time.Duration(1800)*time.Second
 		time.Sleep(duration)
 	}
 }
